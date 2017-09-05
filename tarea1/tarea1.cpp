@@ -80,88 +80,8 @@ public:
     }
     
     // EJER 1) operador de entrada del clsVector3D:
-    friend istream& operator >>( istream& is, clsVector3D& v ){
-        enum edo { S0, S1, S2, S3, S4, S5, SF, SError };
-        enum edo s = S0;
-        char c;
-        int n;
-        
-        while ((s != SF) && (s != SError))
-        {
-            //f >> c;
-            //f.eatwhite();
-            is.get(c);
-            cout << c;
-            if (is.eof()) c = '\0';
-            switch (s)
-            {
-                case S0:if (c == '[')
-                    s = S1;
-                else
-                    s = SError;
-                    break;
-                case S1:
-                case S5:
-                    if (c == '(')
-                    {
-                        //s = S2;
-                        is >> n;
-                        s = S3;
-                    }
-                    else
-                        if (c == ']')
-                            s = SF;
-                        else
-                            s = SError;
-                    break;
-                case S2:if ('0' <= c  && c <= '9')
-                {
-                    //d = c;
-                    s = S3;
-                }
-                else
-                    s = SError;
-                    break;
-                case S3:if (c == ')')
-                {
-                    s = S4;
-                    cout << "Se agrega el nodo con id " << n << endl;
-                }
-                else
-                    s = SError;
-                    break;
-                case S4:if (c == ']')
-                    s = SF;
-                else
-                    if (c == ',')
-                        s = S5;
-                    else
-                        s = SError;
-                    break;
-                    /*		case S5:if( c == '(' )
-                     s = S2;
-                     else
-                     s = SError;
-                     break;
-                     */
-                    
-            }
-        }
-        if (s == SF)
-            cout << "todo ok\n";
-        else
-        {
-            cout << "error en la cadena\n";
-            throw 5;
-        }
-        // por lo pronto solo es un dummy que regresa el (0,1.0,2.0)
-        clsVector3D w;
-        w.y(1.0);
-        w.z(2.0);
-        
-        v = w;
-        return is;
-    }
+//    friend istream& operator >>( istream& is, clsVector3D& v ){
+//    }
     // EJER 2) operador Producto Cruz de dos clsVector3D
 //    ya está
     friend clsVector3D operator *( clsVector3D& a, clsVector3D& b )
@@ -214,7 +134,7 @@ public:
         string x = (p.B()<0) ? "x " : "x +";
         string y = (p.C()<0) ? "y " : "y +";
         string z = (p.D()<0) ? "z " : "z +";
-        cout << "plano: " << p.A() << x << p.B() << y << p.C() << z << p.D() << "= 0\n";
+        cout << "plano: " << p.A() << x << p.B() << y << p.C() << z << p.D() << " = 0\n";
         return os;
     }
     
