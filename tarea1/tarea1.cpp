@@ -211,7 +211,10 @@ public:
     // EJER 4) ImpresiÛn del plano A * x + B * y + c * z + D = 0.
     friend ostream& operator <<( ostream& os, clsPlano3D& p )
     {
-        os << "Este es el dummy de la impresiÛn del plano..." << endl;
+        string x = (p.B()<0) ? "x " : "x +";
+        string y = (p.C()<0) ? "y " : "y +";
+        string z = (p.D()<0) ? "z " : "z +";
+        cout << "plano: " << p.A() << x << p.B() << y << p.C() << z << p.D() << "= 0\n";
         return os;
     }
     
@@ -281,7 +284,7 @@ int main()
     
     q1=clsPlano3D(a, b, c);
     
-    cout << "plano: " << q1.A() << "x" << q1.B() << "y" << q1.C() << "z" << q1.D();
+    cout << q1;
 //    cout << q1 << endl;
     
 //    cout << "Interseccion " << interseccion( q1,q2,q3 ) << endl;
