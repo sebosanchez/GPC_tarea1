@@ -190,7 +190,10 @@ public:
     // EJER 3)  Construir el plano a partir de los tres puntos v1, v2 y v3.
     clsPlano3D( clsVector3D v1, clsVector3D v2, clsVector3D v3 )
     {  // por lo pronto un dummy que entrega el 5x + 5y + 5z + 5 = 0.
-        dbl_A = dbl_B = dbl_C = dbl_D = 5.0;
+        dbl_A = ((v2.y() - v1.y()) * (v3.z() - v1.z())) - ((v3.y() - v1.y()) * (v2.z() - v1.z()));
+        dbl_B = ((v2.z() - v1.z()) * (v3.x() - v1.x())) - ((v3.z() - v1.z()) * (v2.x() - v1.x()));
+        dbl_C = ((v2.x() - v1.x()) * (v3.y() - v1.y())) - ((v3.x() - v1.x()) * (v2.y() - v1.y()));
+        dbl_D = dbl_A * -v1.x() + dbl_B * -v1.y() + dbl_C * -v1.z();
     }
     
     void A( double unA ) { dbl_A = unA; }
@@ -201,6 +204,9 @@ public:
     
     void C( double unC ) { dbl_C = unC; }
     double C() { return dbl_C; }
+    
+    void D( double unD ) { dbl_D = unD; }
+    double D() { return dbl_D; }
     
     // EJER 4) ImpresiÛn del plano A * x + B * y + c * z + D = 0.
     friend ostream& operator <<( ostream& os, clsPlano3D& p )
@@ -251,15 +257,32 @@ int main()
     
     //cout << a << " * " << 5.0 << " = " << a * 5.0 << endl;
     
-    cin >> c;
+//    cin >> c;
     
-    cout << "c = " << c << endl;
+//    cout << "c = " << c << endl;
     
     //cout << " a * b = " << a << " * " << b << " = " << a * b << endl;
     
     clsPlano3D q1,q2,q3;
     
-    cout << q1 << endl;
+    
+    
+    a.x( 3.0 );
+    a.y( 2.0 );
+    a.z( 1.0 );
+    
+    b.x( -4.0 );
+    b.y( -1.0 );
+    b.z( 1.0 );
+    
+    c.x( -5.0 );
+    c.y( -3.0 );
+    c.z( -1.0 );
+    
+    q1=clsPlano3D(a, b, c);
+    
+    cout << "plano: " << q1.A() << "x" << q1.B() << "y" << q1.C() << "z" << q1.D();
+//    cout << q1 << endl;
     
 //    cout << "Interseccion " << interseccion( q1,q2,q3 ) << endl;
     
